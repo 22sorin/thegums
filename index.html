@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#23352a">
+	<title>대부도 힐링 가을 여행</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--forest: #23352a;
+			--ink: #2e302b;
+			--rust: #ad5635;
+			--gold: #d5a451;
+			--paper: #f5f0e7;
+			--line: rgba(46, 48, 43, .16);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--paper);
+			font-family: "Gowun Batang", serif;
+			line-height: 1.8;
+		}
+
+		.hero {
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			padding: 48px 24px;
+			color: #fffaf0;
+			position: relative;
+			overflow: hidden;
+			background: linear-gradient(115deg, rgba(24, 48, 37, .94) 10%, rgba(37, 56, 43, .72) 55%, rgba(93, 52, 35, .65)), url("pic1.png") center / cover;
+		}
+
+		.hero::before {
+			content: "";
+			position: absolute;
+			inset: 22px;
+			border: 1px solid rgba(255, 250, 240, .48);
+			pointer-events: none;
+		}
+
+		.hero-content { max-width: 920px; position: relative; text-align: center; animation: rise .9s ease both; }
+		.eyebrow { color: #f1cc7c; font-size: .9rem; letter-spacing: .22em; margin: 0 0 22px; }
+		h1, h2, p { margin-top: 0; }
+		h1 { font-family: "Nanum Myeongjo", serif; font-size: clamp(2.7rem, 7vw, 6.3rem); line-height: 1.22; letter-spacing: .02em; margin-bottom: 22px; }
+		.hero-lead { max-width: 650px; margin: 0 auto 34px; font-size: clamp(1rem, 2vw, 1.25rem); color: #f6e8d2; }
+		.date-ribbon { display: inline-flex; gap: 17px; align-items: center; border-top: 1px solid rgba(255,255,255,.5); border-bottom: 1px solid rgba(255,255,255,.5); padding: 10px 18px; font-size: 1.02rem; }
+		.scroll-link { display: inline-block; margin-top: 50px; color: #fffaf0; font-size: .8rem; letter-spacing: .14em; text-decoration: none; }
+
+		main { overflow: hidden; }
+		.intro { max-width: 920px; margin: 0 auto; padding: 110px 24px 86px; text-align: center; }
+		.section-label { color: var(--rust); font-size: .78rem; letter-spacing: .2em; margin-bottom: 16px; }
+		h2 { font-family: "Nanum Myeongjo", serif; font-size: clamp(1.9rem, 4vw, 3.1rem); line-height: 1.4; margin-bottom: 25px; color: var(--forest); }
+		.intro p { max-width: 700px; margin: 0 auto 16px; font-size: 1.05rem; }
+		.intro .emphasis { color: var(--rust); font-weight: 700; font-size: 1.18rem; margin-top: 29px; }
+
+		.gallery-wrap { background: #dfe4d8; padding: 80px 24px 100px; }
+		.gallery-heading { max-width: 1180px; margin: 0 auto 30px; display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+		.gallery-heading h2 { margin-bottom: 0; }
+		.gallery-note { margin: 0 0 8px; color: #667063; font-size: .9rem; }
+		.gallery { max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1.25fr .75fr .75fr; grid-template-rows: 270px 270px; gap: 15px; }
+		.photo { margin: 0; overflow: hidden; position: relative; background: #c3cdbd; }
+		.photo:first-child { grid-row: span 2; }
+		.photo:nth-child(4) { grid-column: 2 / span 2; }
+		.photo img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s ease; }
+		.photo:hover img { transform: scale(1.04); }
+		.photo figcaption { position: absolute; left: 15px; bottom: 11px; color: white; font-size: .75rem; letter-spacing: .1em; text-shadow: 0 1px 4px #000; }
+
+		.details { padding: 100px 24px 115px; max-width: 1050px; margin: auto; }
+		.details-heading { text-align: center; margin-bottom: 55px; }
+		.info-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+		.info-item { padding: 27px 30px; border-bottom: 1px solid var(--line); }
+		.info-item:nth-child(odd) { border-right: 1px solid var(--line); }
+		.info-item dt { color: var(--rust); font-size: .78rem; letter-spacing: .16em; margin-bottom: 7px; }
+		.info-item dd { margin: 0; font-family: "Nanum Myeongjo", serif; font-weight: 700; font-size: 1.3rem; color: var(--forest); }
+		.notice { margin-top: 42px; padding: 25px 28px; background: #e7e1d5; border-left: 4px solid var(--gold); font-size: .94rem; }
+		.closing { text-align: center; margin-top: 78px; color: var(--forest); }
+		.closing p { margin-bottom: 5px; }
+		.closing strong { color: var(--rust); font-family: "Nanum Myeongjo", serif; font-size: 1.35rem; }
+		footer { padding: 25px; text-align: center; background: var(--forest); color: #cbd4c5; font-size: .75rem; letter-spacing: .1em; }
+
+		@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+		@media (max-width: 700px) {
+			.hero { min-height: 90vh; padding: 30px 16px; }
+			.hero::before { inset: 12px; }
+			.date-ribbon { gap: 9px; font-size: .86rem; }
+			.intro, .details { padding-top: 75px; padding-bottom: 70px; }
+			.gallery-wrap { padding: 65px 16px 75px; }
+			.gallery-heading { display: block; }
+			.gallery-note { margin-top: 4px; }
+			.gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 150px 150px; gap: 9px; }
+			.photo:first-child { grid-row: span 1; grid-column: span 2; }
+			.photo:nth-child(4) { grid-column: span 2; }
+			.info-grid { display: block; }
+			.info-item, .info-item:nth-child(odd) { border-right: 0; padding: 21px 6px; }
+			.info-item dd { font-size: 1.1rem; }
+			.notice { padding: 19px; }
+		}
+	</style>
+</head>
+<body>
+	<header class="hero">
+		<div class="hero-content">
+			<p class="eyebrow">AUTUMN ESCAPE · 2026</p>
+			<h1>대부도<br>힐링 가을 여행</h1>
+			<p class="hero-lead">선선한 가을바람과 탁 트인 서해바다,<br>그리고 함께라서 더 따뜻한 1박 2일</p>
+			<div class="date-ribbon"><span>11.14 SAT</span><span>—</span><span>11.15 SUN</span></div>
+			<a class="scroll-link" href="#story">여행 이야기 ↓</a>
+		</div>
+	</header>
+
+	<main>
+		<section class="intro" id="story">
+			<p class="section-label">A SEASON TO REMEMBER</p>
+			<h2>가을의 끝자락,<br>우리만의 추억을 만들어요</h2>
+			<p>복잡한 일상을 잠시 벗어나 맛있는 것도 먹고, 멋진 노을도 함께 감상해봐요.</p>
+			<p>이번 여행은 친구, 언니, 동생 등 소중한 사람과 동반하기 좋은 모임으로 준비했습니다.</p>
+			<p class="emphasis">2026년 마무리 여행으로 더없이 좋은 시간, 함께해요.</p>
+		</section>
+
+		<section class="gallery-wrap" aria-label="여행 풍경">
+			<div class="gallery-heading">
+				<div><p class="section-label">THE STAY</p><h2>서해바다와<br>유럽풍 숙소</h2></div>
+				<p class="gallery-note">운영진이 정성껏 준비한 여행의 장면</p>
+			</div>
+			<div class="gallery">
+				<figure class="photo"><img src="pic1.png" alt="대부도의 가을 풍경"><figcaption>01 · </figcaption></figure>
+				<figure class="photo"><img src="pic2.png" alt="대부도 숙소 전경"><figcaption>02 · </figcaption></figure>
+				<figure class="photo"><img src="pic3.png" alt="여행지의 아름다운 모습"><figcaption>03 · </figcaption></figure>
+				<figure class="photo"><img src="pic4.png" alt="유럽풍 숙소의 모습"><figcaption>04 · </figcaption></figure>
+			</div>
+		</section>
+
+		<section class="details">
+			<div class="details-heading"><p class="section-label">MARK YOUR CALENDAR</p><h2>여행 일정</h2></div>
+			<dl class="info-grid">
+				<div class="info-item"><dt>DESTINATION</dt><dd>경기도 안산시 · 대부도</dd></div>
+				<div class="info-item"><dt>DATE</dt><dd>2026년 11월 14일 ~ 15일</dd></div>
+				<div class="info-item"><dt>MOOD</dt><dd>바다 · 맛있는 음식 · 멋진 노을</dd></div>
+				<div class="info-item"><dt>WITH</dt><dd>친구, 오빠, 언니, 동생과 함께</dd></div>
+			</dl>
+			<div class="notice">참석자들만을 위한 별도의 방을 만들어 위치 및 장소명을 안내드릴 예정입니다.</div>
+		</section>
+	</main>
+	<footer>DAEBUDO · AUTUMN 2026</footer>
+</body>
+</html>
