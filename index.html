@@ -77,6 +77,9 @@
 		.cost-lead p { margin: 0 0 8px; }
 		.cost-lead p:last-child { margin-bottom: 0; }
 		.cost-amount { color: var(--rust); font-family: "Nanum Myeongjo", serif; font-size: 2rem; font-weight: 800; }
+		.account-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+		.copy-button { border: 1px solid var(--rust); padding: 4px 10px; color: var(--rust); background: transparent; font: inherit; font-size: .78rem; cursor: pointer; }
+		.copy-button:hover, .copy-button:focus-visible { color: #fffaf0; background: var(--rust); outline: none; }
 		.discount-list { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--line); }
 		.discount-item { padding: 24px 8px; border-bottom: 1px solid var(--line); }
 		.discount-item h3 { margin: 0 0 6px; color: var(--forest); font-family: "Nanum Myeongjo", serif; font-size: 1.1rem; }
@@ -187,7 +190,7 @@
 			<div class="cost-lead">
 				<p><strong>회비 및 계좌번호</strong></p>
 				<p class="cost-amount">10만원</p>
-				<p>계좌번호: 카카오뱅크 3333-36-7183445<br>(예금주: ㄱㅁㅅ)</p>
+				<p class="account-line">계좌번호: 카카오뱅크 3333-36-7183445 <button class="copy-button" type="button" data-account="3333367183445">복사하기</button><br>(예금주: ㄱㅁㅅ)</p>
 				<p>닉네임 반드시 표시하여 입금<br>(혹시 못하시면 김24 일창 주세요)</p>
 			</div>
 			<div class="discount-list">
@@ -197,7 +200,7 @@
 				<div class="discount-item"><h3>D그룹 (운영진)</h3><p>자동 1만원 할인</p></div>
 				<div class="discount-item"><h3>E그룹</h3><p>고기 굽는 분 / 여행에서 운영자를 도와주시는 분들(리더 판단): 20~30% 할인 (후불제)</p></div>
 			</div>
-			<p class="caution"><strong>* 주의사항</strong><br>찬조 금액은 단돈 100원이라고 감사히 잘 쓰겠습니다.</p>
+			<p class="caution"><strong>* 주의사항</strong><br>찬조 금액은 단돈 100원이라도 감사히 잘 쓰겠습니다.</p>
 		</section>
 	</main>
 	<footer>
@@ -215,6 +218,22 @@
 			panels.forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute("aria-controls"); });
 			window.scrollTo({ top: document.querySelector(".tabs").offsetTop, behavior: "smooth" });
 		}));
+			document.querySelector(".copy-button").addEventListener("click", async (event) => {
+				const button = event.currentTarget;
+				const accountNumber = button.dataset.account;
+				try {
+					await navigator.clipboard.writeText(accountNumber);
+				} catch {
+					const input = document.createElement("textarea");
+					input.value = accountNumber;
+					document.body.appendChild(input);
+					input.select();
+					document.execCommand("copy");
+					input.remove();
+				}
+				button.textContent = "복사 완료";
+				setTimeout(() => { button.textContent = "복사하기"; }, 1600);
+			});
 	</script>
 </body>
 </html>
